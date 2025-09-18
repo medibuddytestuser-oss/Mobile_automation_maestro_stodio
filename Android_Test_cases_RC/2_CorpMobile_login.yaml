@@ -1,0 +1,18 @@
+appId: in.medibuddy
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+- tapOn: Enter your 10-digit phone number, Excluding +91 country code
+- inputText: '1000087878'
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '9562'
+- tapOn: Sign In
+- tapOn:
+    point: '50%, 50%' # Taps in the center of the screen
+- tapOn:
+    point: '50%, 50%' # Taps in the center of the screen
+- takeScreenshot: CORP_login_success

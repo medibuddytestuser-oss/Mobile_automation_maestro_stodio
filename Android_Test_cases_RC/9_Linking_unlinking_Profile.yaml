@@ -1,0 +1,6 @@
+appId: in.medibuddy
+---
+# - launchApp:
+#     clearState: true
+- runFlow:
+    file: '4_CorpEmail_Otp_login.yaml'

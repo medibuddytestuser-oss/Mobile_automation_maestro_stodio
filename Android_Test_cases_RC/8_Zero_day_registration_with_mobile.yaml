@@ -1,0 +1,82 @@
+appId: in.medibuddy
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+- tapOn: Enter your 10-digit phone number, Excluding +91 country code
+- inputText: '1000087787'
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '9562'
+- tapOn: Sign In
+- runFlow:
+    when:
+      notVisible: Link Your Corporate Account
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Link Your Corporate Account
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- assertVisible: Link Your Corporate Account
+- tapOn:
+    id: textinput_placeholder
+- inputText: 'test7364322@accenture.com' # Need to implement fakar to generate the email
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '456123'
+# Close the keyboard
+- tapOn:
+    id: back
+- tapOn:
+    id: btnVerify
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      visible: Your Name
+    commands:
+      - tapOn:
+          id: etEnterMobileScreenName
+- runFlow:
+    when:
+      visible: Your Name # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etEnterMobileScreenName
+- inputText: 'Ashish Test user for Zero day'
+- runFlow:
+    when:
+      visible: Enter Employee Code # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etEnterEmployeeCode
+- inputText: 'MB01010012'
+- scroll
+- runFlow:
+    when:
+      visible: Enter Date of Birth # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etDateOfBirth
+- tapOn: Previous month
+- tapOn: '4'
+- tapOn:
+    id: button1
+- assertVisible: Register User
+- tapOn:
+    id: btnGetOtp

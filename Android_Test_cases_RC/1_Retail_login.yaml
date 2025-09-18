@@ -1,0 +1,43 @@
+appId: in.medibuddy
+---
+- evalScript: ${console.log('Test case Started')}
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: Login With Phone number and otp
+- runFlow:
+    when:
+      visible: Choose a phone number
+    commands:
+      - tapOn:
+          id: cancel
+- tapOn:
+    id: edMobile
+- inputText: ${RetailLogin}
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '9562'
+- tapOn: Verify
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      visible: Click 'Reorder' to order again from previous bills!-
+    commands:
+      - tapOn: Click 'Reorder' to order again from previous bills!-
+
+- tapOn:
+    point: '50%, 50%' # Taps in the center of the screen
+
+- tapOn: Menu Icon
+- scroll
+- assertVisible: Logout
+- tapOn: Logout
+- tapOn: Logout
+# - takeScreenshot: Retial_login_success
+- evalScript: ${console.log('Test case completed')}
+- evalScript: ${console.log('Retail login success')}

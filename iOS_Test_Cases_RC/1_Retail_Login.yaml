@@ -1,0 +1,21 @@
+appId: com.mediassist.MediAssist
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    when:
+      visible: Ask App Not to Track
+    commands:
+      - tapOn: Ask App Not to Track
+- tapOn: Your Phone Number
+- tapOn: Enter your input here
+- inputText: '1000027633'
+- tapOn: Proceed
+- tapOn:
+    id: otp_clear
+- inputText: '9562'
+- tapOn: Settings or Profile
+- scroll
+- assertVisible: Logout
+- tapOn: Logout
+- tapOn: Logout

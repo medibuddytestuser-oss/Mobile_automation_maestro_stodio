@@ -1,0 +1,33 @@
+appId: com.mediassist.MediAssist
+---
+- launchApp:
+    clearState: True
+- runFlow:
+    when:
+      visible: Ask App Not to Track
+    commands:
+      - tapOn: Ask App Not to Track
+# - tapOn:
+#     text: 'I have a Corporate Account'
+#     retryTapIfNoChange: true
+# - waitForAnimationToEnd:
+#     timeout: 1000
+- runFlow:
+    when:
+      notVisible: 'I have a Corporate Account'
+    commands:
+      - tapOn:
+          point: 0%,50%
+- tapOn: Enter your input here
+- inputText: '1000087878'
+- tapOn: Proceed
+- tapOn:
+    id: otp_clear
+- inputText: '9562'
+- assertVisible:
+    id: ic_doctorIn10Mins
+- tapOn: Settings or Profile
+- scroll
+- assertVisible: Logout
+- tapOn: Logout
+- tapOn: Logout

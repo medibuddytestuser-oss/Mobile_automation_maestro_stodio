@@ -1,0 +1,36 @@
+# Retails Login flow
+url: https://www.medibuddy.in/
+---
+- launchApp
+- assertVisible: Login
+- tapOn: Login
+# - runFlow:
+#     when:
+#       notVisible: Link Your Corporate Account
+#     commands:
+#       - tapOn:
+#           point: '50%, 50%' # Taps in the center of the screen
+- assertVisible:
+    id: phone
+- inputText: '1000087787'
+- tapOn:
+    text: Login
+    index: 2
+- tapOn:
+    id: otp
+- inputText: '9562'
+- assertVisible: Verify
+- tapOn: Verify
+
+# link profile flow
+- assertVisible: Personal Account
+- tapOn: My MediBuddy Benefit...
+- tapOn:
+    point: 80%,28%
+- assertVisible: Link your corporate account
+- tapOn: Link your corporate account
+- tapOn:
+    id: email
+- inputText: 'test2@medibuddy.in'
+# Unlink profile flow
+

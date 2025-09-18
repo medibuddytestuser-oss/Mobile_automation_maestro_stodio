@@ -1,0 +1,61 @@
+appId: in.medibuddy
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+# Close the keyboard
+- tapOn:
+    id: back
+- assertVisible: Why this step is important? Learn More
+- tapOn: Why this step is important? Learn More
+- assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
+- tapOn:
+    id: tvSkip
+- tapOn:
+    id: textinput_placeholder
+- inputText: 'test7364322@accenture.com'
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '456123'
+# Close the keyboard
+- tapOn:
+    id: back
+- tapOn:
+    id: btnVerify
+- runFlow:
+    when:
+      visible: Your Phone Number
+    commands:
+      - tapOn:
+          id: edMobile
+- inputText: '1000087433'
+- runFlow:
+    when:
+      visible: Your Name # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etEnterMobileScreenName
+- inputText: 'Ashish Test user for Zero day'
+- runFlow:
+    when:
+      visible: Enter Employee Code # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etEnterEmployeeCode
+- inputText: 'MB01010012'
+- scroll
+- runFlow:
+    when:
+      visible: Enter Date of Birth # Need to implement fakar to generate the name
+    commands:
+      - tapOn:
+          id: etDateOfBirth
+- tapOn: Previous month
+- tapOn: '4'
+- tapOn:
+    id: button1
+- assertVisible: Register User
+- tapOn:
+    id: btnGetOtp

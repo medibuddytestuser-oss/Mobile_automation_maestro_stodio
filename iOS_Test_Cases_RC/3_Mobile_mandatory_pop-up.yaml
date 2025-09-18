@@ -1,0 +1,4 @@
+appId: com.mediassist.MediAssist
+---
+- launchApp:
+    clearState: true

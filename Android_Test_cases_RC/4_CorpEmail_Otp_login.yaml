@@ -1,0 +1,52 @@
+appId: in.medibuddy
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+# Close the keyboard
+- tapOn:
+    id: back
+- assertVisible: Why this step is important? Learn More
+- tapOn: Why this step is important? Learn More
+- assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
+- tapOn:
+    id: tvSkip
+- tapOn:
+    id: textinput_placeholder
+# - inputText: 'test5@medibuddy.in'
+- inputText: ${EmailForCorp}
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '456123'
+# Close the keyboard
+- tapOn:
+    id: back
+- tapOn:
+    id: btnVerify
+# - runFlow: toast_tooltips_handled.yaml
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- takeScreenshot: Corp_with_email_login_success

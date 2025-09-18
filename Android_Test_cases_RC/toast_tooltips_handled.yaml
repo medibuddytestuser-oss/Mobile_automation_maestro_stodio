@@ -1,0 +1,26 @@
+# toast_tooltips_handled.yaml
+---
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+

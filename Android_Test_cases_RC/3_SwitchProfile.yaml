@@ -1,0 +1,55 @@
+appId: in.medibuddy
+---
+- launchApp:
+    clearState: True
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+- tapOn: Enter your 10-digit phone number, Excluding +91 country code
+- inputText: '1000087878'
+- tapOn: Proceed
+- tapOn: First digit of the OTP
+- inputText: '9562'
+- tapOn: Sign In
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- tapOn:
+    point: '50%, 50%' # Taps in the center of the screen
+- assertVisible: Corporate Sponsored Account
+- tapOn: Corporate Sponsored Account
+- tapOn: ASSOCIATED INSURANCE SERVICES Benefits
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- assertVisible: Special Package
+- tapOn: Special Package
+- assertVisible: My MediBuddy Benefits
+- tapOn: My MediBuddy Benefits
+- assertVisible: Personal Account
+- tapOn: Personal Account
+- assertVisible: Axis Bank Benefits
+- tapOn: Axis Bank Benefits
+- takeScreenshot: Switch_profile_success

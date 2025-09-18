@@ -1,0 +1,69 @@
+appId: in.medibuddy
+tags:
+  - Sanity
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: tvAgree
+- tapOn: I have a Corporate Account
+# Close the keyboard
+- tapOn:
+    id: back
+- assertVisible: Why this step is important? Learn More
+- tapOn: Why this step is important? Learn More
+- assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
+- tapOn:
+    id: tvSkip
+- assertVisible: Login using Username & Password
+- tapOn:
+    id: tvLoginUsingUsernamePassword
+- assertVisible:
+    id: iv_medibuddy_logo
+- tapOn:
+    id: etUserName
+- log: 'Username input: ${USERNAME_VAR}'
+
+- inputText: 'testthree@grasimindustries.com'
+- assertVisible: Proceed
+- tapOn:
+    id: btnSignIn
+- assertVisible: Enter your Password
+- tapOn:
+    id: etPassword
+- inputText: '01011983'
+- tapOn:
+    id: back
+- runFlow:
+    when:
+      visible: Link your account
+    commands:
+      - tapOn: Link your account
+- runFlow:
+    when:
+      visible: Proceed
+    commands:
+      - tapOn:
+          id: btnSignIn
+- runFlow:
+    when:
+      visible: Close
+    commands:
+      - tapOn: Close
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Close
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      visible: Please verify your phone number to proceed
+    commands:
+      - takeScreenshot: Mobile_mandatory_for_Login_with_username_success
