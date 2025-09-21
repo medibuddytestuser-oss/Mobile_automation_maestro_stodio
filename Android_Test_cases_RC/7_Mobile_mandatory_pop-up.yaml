@@ -1,20 +1,23 @@
 appId: in.medibuddy
-tags:
-  - Sanity
 ---
 - launchApp:
     clearState: true
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: I have a Corporate Account
-# Close the keyboard
-- tapOn:
-    id: back
+- scroll
 - assertVisible: Why this step is important? Learn More
 - tapOn: Why this step is important? Learn More
 - assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
 - tapOn:
     id: tvSkip
+- scroll
 - assertVisible: Login using Username & Password
 - tapOn:
     id: tvLoginUsingUsernamePassword
@@ -22,18 +25,16 @@ tags:
     id: iv_medibuddy_logo
 - tapOn:
     id: etUserName
-- log: 'Username input: ${USERNAME_VAR}'
-
-- inputText: 'testthree@grasimindustries.com'
+- inputText: ${output.mobile_verify.username}
+- scroll
 - assertVisible: Proceed
 - tapOn:
     id: btnSignIn
 - assertVisible: Enter your Password
 - tapOn:
     id: etPassword
-- inputText: '01011983'
-- tapOn:
-    id: back
+- inputText: ${output.mobile_verify.password}
+- scroll
 - runFlow:
     when:
       visible: Link your account
@@ -47,23 +48,41 @@ tags:
           id: btnSignIn
 - runFlow:
     when:
-      visible: Close
+      visible: ×
     commands:
-      - tapOn: Close
+      - tapOn: ×
 - runFlow:
     when:
-      notVisible: Close
+      visible: arrow-left-02
+    commands:
+      - tapOn: arrow-left-02
+- runFlow:
+    when:
+      visible: Save password to Google Password Manager?
+    commands:
+      - tapOn: Never
+- runFlow:
+    when:
+      visible: I Agree
     commands:
       - tapOn:
-          point: '50%, 50%' # Taps in the center of the screen
-- runFlow:
-    when:
-      notVisible: Close
-    commands:
-      - tapOn:
-          point: '50%, 50%' # Taps in the center of the screen
-- runFlow:
-    when:
-      visible: Please verify your phone number to proceed
-    commands:
-      - takeScreenshot: Mobile_mandatory_for_Login_with_username_success
+          id: tvIAgree
+- assertVisible: Please verify your phone number to proceed
+# - runFlow:
+#     when:
+#       visible: Close
+#     commands:
+#       - tapOn: Close
+# - runFlow:
+#     when:
+#       notVisible: Close
+#     commands:
+#       - tapOn:
+#           point: '50%, 50%' # Taps in the center of the screen
+# - runFlow:
+#     when:
+#       notVisible: Close
+#     commands:
+#       - tapOn:
+#           point: '50%, 50%' # Taps in the center of the screen
+# - takeScreenshot: Login_with_username_success

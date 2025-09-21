@@ -2,37 +2,30 @@ appId: in.medibuddy
 ---
 - launchApp:
     clearState: true
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: I have a Corporate Account
 - tapOn: Enter your 10-digit phone number, Excluding +91 country code
-- inputText: '1000087787'
+- inputText: ${output.xeroDayFirstMobileVerify.zeroDayMobile}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '9562'
+- inputText: ${output.credentials.mobileOTP}
+- scroll
 - tapOn: Sign In
-- runFlow:
-    when:
-      notVisible: Link Your Corporate Account
-    commands:
-      - tapOn:
-          point: '50%, 50%' # Taps in the center of the screen
-- runFlow:
-    when:
-      notVisible: Link Your Corporate Account
-    commands:
-      - tapOn:
-          point: '50%, 50%' # Taps in the center of the screen
 - assertVisible: Link Your Corporate Account
 - tapOn:
     id: textinput_placeholder
-- inputText: 'test7364322@accenture.com' # Need to implement fakar to generate the email
+- inputText: ${output.xeroDayFirstMobileVerify.zeroDayEmail}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '456123'
-# Close the keyboard
-- tapOn:
-    id: back
+- inputText: ${output.credentials.emailOTP}
+- scroll
 - tapOn:
     id: btnVerify
 - runFlow:
@@ -48,24 +41,19 @@ appId: in.medibuddy
           point: '50%, 50%' # Taps in the center of the screen
 - runFlow:
     when:
-      visible: Your Name
-    commands:
-      - tapOn:
-          id: etEnterMobileScreenName
-- runFlow:
-    when:
       visible: Your Name # Need to implement fakar to generate the name
     commands:
       - tapOn:
           id: etEnterMobileScreenName
-- inputText: 'Ashish Test user for Zero day'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayName}
+- scroll
 - runFlow:
     when:
       visible: Enter Employee Code # Need to implement fakar to generate the name
     commands:
       - tapOn:
           id: etEnterEmployeeCode
-- inputText: 'MB01010012'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayEmpCode}
 - scroll
 - runFlow:
     when:

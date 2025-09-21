@@ -1,0 +1,89 @@
+appId: in.medibuddy
+---
+- runFlow:
+    file: '2_CorpMobile_login.yaml'
+# Verify the Online cunsultation tab
+- runFlow:
+    when:
+      visible: Doctor in 10 mins*
+    commands:
+      - tapOn: Doctor in 10 mins*
+- assertVisible: Enter Patient Details
+- tapOn:
+    id: iv_toolbar_back
+# Verify the Lab_booking tab
+- runFlow:
+    when:
+      visible: lab test
+    commands:
+      - tapOn: lab test
+# Set location if visible to set
+- runFlow:
+    when:
+      visible: Set Your Location
+    commands:
+      - tapOn:
+          id: tvCrossButton
+- runFlow:
+    when:
+      visible: Continue
+    commands:
+      - tapOn:
+          id: tvSecondBtn
+- assertVisible: Search Lab Tests, Packages
+- tapOn: Navigate up
+# Verify the MEDs booking tab
+- runFlow:
+    when:
+      visible: Buy Medicine
+    commands:
+      - tapOn: Buy Medicine
+# Set location if visible to set
+- runFlow:
+    when:
+      visible: Select Delivery Location
+    commands:
+      - tapOn: oc_close Icon
+- runFlow:
+    when:
+      visible: Continue
+    commands:
+      - tapOn: Continue
+- assertVisible: Search medicines which you want to order
+- tapOn: medibuddylogo
+# Verify the Surgery Care booking tab
+- runFlow:
+    when:
+      visible: Hospitalization/Surgery Care
+    commands:
+      - tapOn: Hospitalization/Surgery Care
+- assertVisible: Search for any symptoms, disease, surgery
+- tapOn: Back
+# Verify the Offline Cunsultation booking tab
+- runFlow:
+    when:
+      visible: In clinic doctor consultation
+    commands:
+      - tapOn: In clinic doctor consultation
+- assertVisible: Search Doctors, Hospitals or Specialities
+- tapOn: previous page
+# Verify the Dental booking tab
+- runFlow:
+    when:
+      visible: Dental
+    commands:
+      - tapOn: Dental
+- assertVisible: Search Doctors, Hospitals or Specialities
+- tapOn: previous page
+# Verify the F&W booking tab
+- runFlow:
+    when:
+      visible: DeFitness / Weight Loss
+    commands:
+      - tapOn: Fitness / Weight Loss
+- tapOn: www.medibuddy
+- runFlow:
+    when:
+      visible: Dismiss update dialogue
+    commands:
+      - tapOn: Dismiss update dialogue

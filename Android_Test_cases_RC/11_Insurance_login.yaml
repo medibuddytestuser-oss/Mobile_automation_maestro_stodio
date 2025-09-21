@@ -1,0 +1,4 @@
+appId: in.medibuddy
+---
+- runFlow:
+    file: '1_Retail_login.yaml'

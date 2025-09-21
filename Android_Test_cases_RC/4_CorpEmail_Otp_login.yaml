@@ -2,12 +2,16 @@ appId: in.medibuddy
 ---
 - launchApp:
     clearState: true
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: I have a Corporate Account
-# Close the keyboard
-- tapOn:
-    id: back
+- scroll
 - assertVisible: Why this step is important? Learn More
 - tapOn: Why this step is important? Learn More
 - assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
@@ -15,17 +19,26 @@ appId: in.medibuddy
     id: tvSkip
 - tapOn:
     id: textinput_placeholder
-# - inputText: 'test5@medibuddy.in'
-- inputText: ${EmailForCorp}
+# Reading data from .js file
+- inputText: ${output.credentials.corpEmail}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '456123'
+- inputText: ${output.credentials.emailOTP}
 # Close the keyboard
-- tapOn:
-    id: back
+- scroll
 - tapOn:
     id: btnVerify
 # - runFlow: toast_tooltips_handled.yaml
+- runFlow:
+    when:
+      visible: ×
+    commands:
+      - tapOn: ×
+- runFlow:
+    when:
+      visible: arrow-left-02
+    commands:
+      - tapOn: arrow-left-02
 - runFlow:
     when:
       notVisible: Close
@@ -49,4 +62,4 @@ appId: in.medibuddy
     commands:
       - tapOn:
           point: '50%, 50%' # Taps in the center of the screen
-- takeScreenshot: Corp_with_email_login_success
+# - takeScreenshot: Corp_with_email_login_success

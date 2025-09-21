@@ -1,6 +1,81 @@
 appId: in.medibuddy
 ---
-# - launchApp:
-#     clearState: true
 - runFlow:
     file: '4_CorpEmail_Otp_login.yaml'
+- runFlow:
+    when:
+      visible: Menu Icon
+    commands:
+      - tapOn: Menu Icon
+- runFlow:
+    when:
+      visible: Help & Support
+    commands:
+      - tapOn:
+          id: nav_switch_profile_card
+- assertVisible: Your Linked Accounts
+
+# Unlinked first
+- runFlow:
+    when:
+      visible: MediBuddy Employee Benefits
+    commands:
+      - tapOn:
+          id: tvUnlink
+- runFlow:
+    when:
+      visible: Are you sure you want to unlink your corporate account?
+    commands:
+      - tapOn:
+          id: tvCtaDeleteProfile
+- runFlow:
+    when:
+      visible: Dismiss update dialogue
+    commands:
+      - tapOn: Dismiss update dialogue
+# Now Link again the same CORP profile
+- runFlow:
+    when:
+      visible: Menu Icon
+    commands:
+      - tapOn: Menu Icon
+- runFlow:
+    when:
+      visible: Help & Support
+    commands:
+      - tapOn:
+          id: nav_switch_profile_card
+- assertVisible: Your Linked Accounts
+- runFlow:
+    when:
+      visible: Link your corporate account
+    commands:
+      - tapOn:
+          id: tvLinkAccount
+- assertVisible:
+    id: iv_medibuddy_logo
+- tapOn:
+    id: etEnterCorporateEmailOTPScreen
+# Reading data from .js file
+- inputText: ${output.credentials.corpEmail}
+- tapOn:
+    id: tvGetOtp
+- tapOn: First digit of the OTP
+- inputText: ${output.credentials.emailOTP}
+- runFlow:
+    when:
+      visible: Link Account
+    commands:
+      - tapOn:
+          id: tvVerify
+- runFlow:
+    when:
+      visible: Skip
+    commands:
+      - tapOn:
+          id: txt_skip
+- runFlow:
+    when:
+      visible: Dismiss update dialogue
+    commands:
+      - tapOn: Dismiss update dialogue

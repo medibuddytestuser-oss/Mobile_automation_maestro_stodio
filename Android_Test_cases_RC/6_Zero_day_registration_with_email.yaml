@@ -2,12 +2,16 @@ appId: in.medibuddy
 ---
 - launchApp:
     clearState: true
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: I have a Corporate Account
-# Close the keyboard
-- tapOn:
-    id: back
+- scroll
 - assertVisible: Why this step is important? Learn More
 - tapOn: Why this step is important? Learn More
 - assertVisible: Keep your account secure! Don’t skip verifying your Mobile Number
@@ -15,13 +19,11 @@ appId: in.medibuddy
     id: tvSkip
 - tapOn:
     id: textinput_placeholder
-- inputText: 'test7364322@accenture.com'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayEmail}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '456123'
-# Close the keyboard
-- tapOn:
-    id: back
+- inputText: ${output.credentials.emailOTP}
+- scroll
 - tapOn:
     id: btnVerify
 - runFlow:
@@ -30,21 +32,21 @@ appId: in.medibuddy
     commands:
       - tapOn:
           id: edMobile
-- inputText: '1000087433'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayMobile}
 - runFlow:
     when:
       visible: Your Name # Need to implement fakar to generate the name
     commands:
       - tapOn:
           id: etEnterMobileScreenName
-- inputText: 'Ashish Test user for Zero day'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayName}
 - runFlow:
     when:
       visible: Enter Employee Code # Need to implement fakar to generate the name
     commands:
       - tapOn:
           id: etEnterEmployeeCode
-- inputText: 'MB01010012'
+- inputText: ${output.xeroDayFirstEmailVerify.zeroDayEmpCode}
 - scroll
 - runFlow:
     when:

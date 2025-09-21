@@ -3,8 +3,14 @@ appId: in.medibuddy
 - evalScript: ${console.log('Test case Started')}
 - launchApp:
     clearState: true
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: Login With Phone number and otp
 - runFlow:
     when:
@@ -14,11 +20,23 @@ appId: in.medibuddy
           id: cancel
 - tapOn:
     id: edMobile
-- inputText: ${RetailLogin}
+# Reading data from .js file
+- inputText: ${output.credentials.retailMobile}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '9562'
+# Reading data from .js file
+- inputText: ${output.credentials.mobileOTP}
 - tapOn: Verify
+- runFlow:
+    when:
+      visible: ×
+    commands:
+      - tapOn: ×
+- runFlow:
+    when:
+      visible: arrow-left-02
+    commands:
+      - tapOn: arrow-left-02
 - runFlow:
     when:
       visible: Close
@@ -32,7 +50,7 @@ appId: in.medibuddy
 
 - tapOn:
     point: '50%, 50%' # Taps in the center of the screen
-
+- assertVisible: Introducing ‘Family’. Health history of all your loved ones in one place!
 - tapOn: Menu Icon
 - scroll
 - assertVisible: Logout
@@ -40,4 +58,3 @@ appId: in.medibuddy
 - tapOn: Logout
 # - takeScreenshot: Retial_login_success
 - evalScript: ${console.log('Test case completed')}
-- evalScript: ${console.log('Retail login success')}

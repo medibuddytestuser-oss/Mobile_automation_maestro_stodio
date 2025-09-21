@@ -2,15 +2,33 @@ appId: in.medibuddy
 ---
 - launchApp:
     clearState: True
-- tapOn:
-    id: tvAgree
+- runScript:
+    file: '../Scripts/credentials.js'
+- runFlow:
+    when:
+      visible: I Agree
+    commands:
+      - tapOn:
+          id: tvAgree
 - tapOn: I have a Corporate Account
 - tapOn: Enter your 10-digit phone number, Excluding +91 country code
-- inputText: '1000087878'
+# Reading data from .js file
+- inputText: ${output.credentials.corpLogin}
 - tapOn: Proceed
 - tapOn: First digit of the OTP
-- inputText: '9562'
+# Reading data from .js file
+- inputText: ${output.credentials.mobileOTP}
 - tapOn: Sign In
+- runFlow:
+    when:
+      visible: ×
+    commands:
+      - tapOn: ×
+- runFlow:
+    when:
+      visible: arrow-left-02
+    commands:
+      - tapOn: arrow-left-02
 - runFlow:
     when:
       visible: Close
@@ -18,18 +36,22 @@ appId: in.medibuddy
       - tapOn: Close
 - runFlow:
     when:
-      notVisible: Close
+      notVisible: Corporate Sponsored Account
     commands:
       - tapOn:
           point: '50%, 50%' # Taps in the center of the screen
 - runFlow:
     when:
-      notVisible: Close
+      notVisible: Corporate Sponsored Account
     commands:
       - tapOn:
           point: '50%, 50%' # Taps in the center of the screen
-- tapOn:
-    point: '50%, 50%' # Taps in the center of the screen
+- runFlow:
+    when:
+      notVisible: Corporate Sponsored Account
+    commands:
+      - tapOn:
+          point: '50%, 50%' # Taps in the center of the screen
 - assertVisible: Corporate Sponsored Account
 - tapOn: Corporate Sponsored Account
 - tapOn: ASSOCIATED INSURANCE SERVICES Benefits
@@ -52,4 +74,14 @@ appId: in.medibuddy
 - tapOn: Personal Account
 - assertVisible: Axis Bank Benefits
 - tapOn: Axis Bank Benefits
+- runFlow:
+    when:
+      visible: ×
+    commands:
+      - tapOn: ×
+- runFlow:
+    when:
+      visible: arrow-left-02
+    commands:
+      - tapOn: arrow-left-02
 - takeScreenshot: Switch_profile_success
